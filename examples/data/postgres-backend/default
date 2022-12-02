@@ -1,0 +1,4 @@
+---
+
+sssd_ldap_access_filter: select val from default_values where name = 'sssd_ldap::ldap_access_filter' and tier in ( '%{facts.tier}', 'any' ) and project in ( '%{facts.project}', 'any' ) and role in ( '%{facts.role}', 'any' ) and city in ( '%{facts.city}', 'any' ) and certname in ( '%{trusted.certname}', 'any' );
+

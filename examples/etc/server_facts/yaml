@@ -1,0 +1,4 @@
+---
+hiera5_postgres_backend_password: correct-horse-battery-staple
+some_other_password: hunter2
+tier: testduction

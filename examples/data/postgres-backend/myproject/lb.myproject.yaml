@@ -1,0 +1,6 @@
+---
+
+balance: select balance from load_balancer_config where project = 'myproject';
+timeout: select timeout from load_balancer_config where project = 'myproject';
+cert: select cert from load_balancer_config where project = 'myproject';
+key: select key from load_balancer_config where project = 'myproject';

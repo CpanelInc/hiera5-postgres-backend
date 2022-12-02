@@ -1,0 +1,46 @@
+---
+version: 5
+
+defaults:
+  datadir: "data"
+
+hierarchy:
+
+  - name: 'postgres backend'
+    lookup_key: 'hiera_postgres_backend'
+    paths:
+      - "postgres-backend/%{trusted.certname}"
+      - "postgres-backend/%{facts.project}/%{facts.role}.%{facts.project}.%{facts.tier}.yaml"
+      - "postgres-backend/%{facts.project}/%{facts.role}.%{facts.project}.%{facts.flattened_tier}.yaml"
+      - "postgres-backend/%{facts.project}/%{facts.role}.%{facts.project}.yaml"
+      - "postgres-backend/%{facts.project}/%{facts.project}.yaml"
+      - "postgres-backend/default"
+    options:
+      user: hiera_db
+      pass_file: /etc/server_facts/yaml
+      database: hiera_db
+      host: 10.111.222.33
+
+  - name: 'eyaml backend'
+    lookup_key: 'eyaml_lookup_key'
+    paths:
+      - "nodes/%{trusted.certname}.eyaml"
+      - "roles_and_projects/%{facts.project}/%{facts.role}.%{facts.project}.%{facts.tier}.eyaml"
+      - "roles_and_projects/%{facts.project}/%{facts.role}.%{facts.project}.%{facts.flattened_tier}.eyaml"
+      - "roles_and_projects/%{facts.project}/%{facts.role}.%{facts.project}.eyaml"
+      - "roles_and_projects/%{facts.project}/%{facts.project}.%{facts.tier}.eyaml"
+      - "roles_and_projects/%{facts.project}/%{facts.project}.%{facts.flattened_tier}.eyaml"
+      - "roles_and_projects/%{facts.project}/%{facts.project}.eyaml"
+      - "tiers/%{facts.tier}.eyaml"
+      - "tiers/%{facts.flattened_tier}.eyaml"
+      - "cities/%{facts.city}.eyaml"
+      - "common.eyaml"
+    options:
+      pkcs7_private_key: /etc/puppetlabs/puppet/keys/private_key.pkcs7.pem
+      pkcs7_public_key: /etc/puppetlabs/puppet/keys/public_key.pkcs7.pem
+
+  - name: 'Yaml backend'
+    data_hash: yaml_data
+    paths:
+      - 'common.yaml'
+
